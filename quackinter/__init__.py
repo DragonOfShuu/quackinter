@@ -1,0 +1,1 @@
+from quackinter.quackinter import interpret
