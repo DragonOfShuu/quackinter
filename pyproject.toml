@@ -7,7 +7,20 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+pyautogui = "^0.9.54"
 
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+poethepoet = "^0.29.0"
+ruff = "^0.6.9"
+
+[tool.poe.tasks]
+format = "black ."
+lint = "ruff check"
+polish = ["format", "lint"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "N", "ANN0", "Q002"]
 
 [build-system]
 requires = ["poetry-core"]
