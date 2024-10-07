@@ -1,4 +1,16 @@
 from quackinter.quackinter import interpret
 from quackinter.interpreter import Interpreter
 
-__all__ = ["interpret", "Interpreter"]
+from quackinter.errors import (
+    QuackinterError,
+    InterpretationError,
+    CommandNotDefinedError,
+)
+
+__all__ = [
+    "interpret",
+    "Interpreter",
+    "QuackinterError",
+    "InterpretationError",
+    "CommandNotDefinedError",
+]

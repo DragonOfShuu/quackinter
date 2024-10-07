@@ -8,7 +8,7 @@ class Command(ABC):
 
     @abstractmethod
     @staticmethod
-    def execute(context: Context) -> None:
+    def execute(context: Context, cmd: str, data: str) -> None:
         pass
 
     @classmethod
