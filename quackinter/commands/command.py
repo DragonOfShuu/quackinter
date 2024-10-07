@@ -13,4 +13,4 @@ class Command(ABC):
 
     @classmethod
     def is_this_command(cls, name: str, data: str) -> bool:
-        return name in cls.names
+        return name.upper() in cls.names

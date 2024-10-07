@@ -1,12 +1,15 @@
+from typing import Generator
+
+
 class Context:
     def __init__(self, ducky: list[str]) -> None:
         self._ducky_code = ducky
         self._current_line = 0
 
-    def get_line_gen(self):
+    def get_line_gen(self) -> Generator[tuple[int, str]]:
         for index, line in enumerate(self._ducky_code):
             # Separated for readability
-            yield [index, line]
+            yield (index, line)
             self._current_line += 1
 
     def __iter__(self):

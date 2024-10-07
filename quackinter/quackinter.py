@@ -1,8 +1,7 @@
-from quackinter.stack import Stack
+from quackinter.config import Config
+from quackinter.interpreter import Interpreter
 
 
-def interpret(ducky: str, delay: float | None = None):
-    new_ducky = ducky.split("\n")
-
-    stack = Stack()
-    stack.run(new_ducky)
+def interpret(ducky: str, config: Config):
+    interpreter = Interpreter(config=config)
+    interpreter.interpret_text(ducky)
