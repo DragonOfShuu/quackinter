@@ -5,12 +5,22 @@ class QuackinterError(Exception):
     pass
 
 
+class OutsideContextError(QuackinterError):
+    pass
+
+
 class InterpretationError(QuackinterError):
-    def __init__(self, line: int, context: Context, *args: object):
+    def __init__(self, *args: object):
         super().__init__(*args)
-        self.line = line
-        self.context = context
+        self.contexts = []
+    
+    def add_context(self, new_context: Context):
+        self.contexts.append(new_context)
 
 
 class CommandNotDefinedError(InterpretationError):
+    pass
+
+
+class NotANumberError(InterpretationError):
     pass
