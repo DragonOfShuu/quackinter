@@ -24,3 +24,7 @@ class CommandNotDefinedError(InterpretationError):
 
 class NotANumberError(InterpretationError):
     pass
+
+
+class KeyNotExistError(InterpretationError):
+    pass

@@ -3,10 +3,10 @@ from quackinter.context import Context
 from quackinter.key_injector import KeyInjector
 
 
-class StringLn(Command):
-    names = ["STRINGLN"]
+class GUI(Command):
+    names = ["GUI", "WINDOWS"]
 
     @classmethod
-    def execute(cls, context: Context, cmd: str, data: str) -> None:
+    def execute(cls, context: Context, cmd: str, data: str):
         injector = KeyInjector(context)
-        injector.write(f"{data}\n")
+        injector.hotkey(['win', *data.strip().split(' ')])

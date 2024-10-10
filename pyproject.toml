@@ -6,7 +6,7 @@ authors = ["Dragon of Shuu <68718280+DragonOfShuu@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 pyautogui = "^0.9.54"
 
 [tool.poetry.group.dev.dependencies]
