@@ -36,13 +36,19 @@ class KeyInjector:
     def __init__(self, context: Context):
         self.context = context
     
-    def is_key(self, key: str):
-        return key.lower() in self.ACCEPTED_KEYS
+    @classmethod
+    def is_key(cls, key: str):
+        return cls.normalize(key).lower() in cls.ACCEPTED_KEYS
+    
+    @classmethod
+    def normalize(cls, key: str):
+        return key.replace('GUI', 'WIN').replace('WINDOWS', 'WIN')
     
     def _verify_key(self, key: str):
-        if not self.is_key(key):
+        new_key = self.normalize(key)
+        if not self.is_key(new_key):
             raise KeyNotExistError(f'{key} is not a valid key.')
-        return key
+        return new_key
     
     def press(self, key: str):
         pyag.press(self._verify_key(key), interval=self.context.config.char_interval)
@@ -52,9 +58,7 @@ class KeyInjector:
     
     def hotkey(self, hotkeys: list[str]):
         keys = [(key.lower() if len(key) > 1 else key) for key in hotkeys if key]
-        for key in keys:
-            self._verify_key(key)
-        pyag.hotkey(*keys, interval=self.context.config.char_interval)
+        pyag.hotkey(*[self._verify_key(key) for key in keys], interval=self.context.config.char_interval)
 
     def hold(self, key: str|list[str]):
         new_key = [key] if isinstance(key, str) else key
