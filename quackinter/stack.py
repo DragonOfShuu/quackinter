@@ -10,7 +10,7 @@ class Stack:
     def __init__(self, commands: list[Command], config: Config) -> None:
         self.commands = commands
         self.config = config
-        self.context: Context|None = None
+        self.context: Context | None = None
 
     def run(self, ducky: list[str]) -> str | None:
         clean_ducky = Sanitizer.sanitize_lines(ducky)

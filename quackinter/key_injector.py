@@ -5,6 +5,7 @@ import pyautogui as pyag
 
 from quackinter.errors import KeyNotExistError
 
+# fmt: off
 AcceptedKeysType = typing.Literal['\t', '\n', '\r', ' ', '!', '"', '#', '$', '%', '&', "'", '(',
 ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7',
 '8', '9', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`',
@@ -27,39 +28,44 @@ AcceptedKeysType = typing.Literal['\t', '\n', '\r', ' ', '!', '"', '#', '$', '%'
 'shift', 'shiftleft', 'shiftright', 'sleep', 'space', 'stop', 'subtract', 'tab',
 'up', 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen',
 'command', 'option', 'optionleft', 'optionright']
+# fmt: on
 
 accepted_keys = typing.get_args(AcceptedKeysType)
+
 
 class KeyInjector:
     ACCEPTED_KEYS = accepted_keys
 
     def __init__(self, context: Context):
         self.context = context
-    
+
     @classmethod
     def is_key(cls, key: str):
         return cls.normalize(key).lower() in cls.ACCEPTED_KEYS
-    
+
     @classmethod
     def normalize(cls, key: str):
-        return key.replace('GUI', 'WIN').replace('WINDOWS', 'WIN')
-    
+        return key.replace("GUI", "WIN").replace("WINDOWS", "WIN")
+
     def _verify_key(self, key: str):
         new_key = self.normalize(key)
         if not self.is_key(new_key):
-            raise KeyNotExistError(f'{key} is not a valid key.')
+            raise KeyNotExistError(f"{key} is not a valid key.")
         return new_key
-    
+
     def press(self, key: str):
         pyag.press(self._verify_key(key), interval=self.context.config.char_interval)
-    
+
     def write(self, text: str):
         pyag.write(text, interval=self.context.config.char_interval)
-    
+
     def hotkey(self, hotkeys: list[str]):
         keys = [(key.lower() if len(key) > 1 else key) for key in hotkeys if key]
-        pyag.hotkey(*[self._verify_key(key) for key in keys], interval=self.context.config.char_interval)
+        pyag.hotkey(
+            *[self._verify_key(key) for key in keys],
+            interval=self.context.config.char_interval,
+        )
 
-    def hold(self, key: str|list[str]):
+    def hold(self, key: str | list[str]):
         new_key = [key] if isinstance(key, str) else key
         return pyag.hold([self._verify_key(key) for key in new_key if key])

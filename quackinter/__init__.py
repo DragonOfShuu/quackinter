@@ -6,7 +6,7 @@ from quackinter.errors import (
     InterpretationError,
     CommandNotDefinedError,
     OutsideContextError,
-    NotANumberError
+    NotANumberError,
 )
 
 __all__ = [
@@ -16,5 +16,5 @@ __all__ = [
     "InterpretationError",
     "CommandNotDefinedError",
     "OutsideContextError",
-    "NotANumberError"
+    "NotANumberError",
 ]

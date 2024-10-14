@@ -29,4 +29,3 @@ class Command(ABC):
             return int(data)
         except ValueError:
             raise NotANumberError(f"Value '{data}' is not an integer.")
-    

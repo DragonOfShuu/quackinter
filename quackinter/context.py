@@ -41,9 +41,8 @@ class Context:
     @property
     def default_delay(self):
         return self._time_between_lines_override or self._default_delay
-    
+
     @default_delay.setter
     def default_delay(self, value: float):
         self._default_delay = value
         return value
-    
