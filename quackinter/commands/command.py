@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
-from quackinter.context import Context
+from quackinter.config import Config
+from quackinter.environment import Environment
+from quackinter.stack_context import StackContext
 from quackinter.errors import NotANumberError
 
 
@@ -9,7 +11,7 @@ class Command(ABC):
 
     @classmethod
     @abstractmethod
-    def execute(cls, context: Context, cmd: str, data: str) -> None:
+    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
         pass
 
     @classmethod
@@ -29,3 +31,7 @@ class Command(ABC):
             return int(data)
         except ValueError:
             raise NotANumberError(f"Value '{data}' is not an integer.")
+
+    @classmethod
+    def global_environment_init(cls, environment: Environment, config: Config) -> None:
+        pass

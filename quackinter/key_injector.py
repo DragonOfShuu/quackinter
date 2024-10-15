@@ -1,5 +1,5 @@
 import typing
-from quackinter.context import Context
+from quackinter.stack_context import StackContext
 
 import pyautogui as pyag
 
@@ -36,7 +36,7 @@ accepted_keys = typing.get_args(AcceptedKeysType)
 class KeyInjector:
     ACCEPTED_KEYS = accepted_keys
 
-    def __init__(self, context: Context):
+    def __init__(self, context: StackContext):
         self.context = context
 
     @classmethod

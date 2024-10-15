@@ -1,20 +1,28 @@
+from __future__ import annotations
+
 from quackinter.commands.command import Command
 from quackinter.config import Config
-from quackinter.context import Context
+from quackinter.environment import Environment
+from quackinter.stack_context import StackContext
 from quackinter.sanitizer import Sanitizer
 from quackinter.utils import extract_cmd
 from quackinter.errors import CommandNotDefinedError, InterpretationError
 
 
 class Stack:
-    def __init__(self, commands: list[Command], config: Config) -> None:
+    def __init__(self, commands: list[Command], config: Config, old_enviro: Environment|None = None) -> None:
         self.commands = commands
         self.config = config
-        self.context: Context | None = None
+        self.context: StackContext | None = None
+        self.old_stack = old_enviro
+        if old_enviro:
+            self.environment = old_enviro.extend()
+        else:
+            self.environment = Environment()
 
     def run(self, ducky: list[str]) -> str | None:
         clean_ducky = Sanitizer.sanitize_lines(ducky)
-        self.context = Context(clean_ducky, self.config)
+        self.context = StackContext(clean_ducky, self.config)
         for i in self.context:
             cmd_str, data = extract_cmd(i[1])
             command = self._find_command(cmd_str, data)

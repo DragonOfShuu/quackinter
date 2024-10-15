@@ -3,6 +3,7 @@ from time import sleep
 from quackinter.commands.command import Command
 from quackinter.config import Config
 from quackinter.commands import commands as built_in_ducky_commands
+from quackinter.environment import Environment
 from quackinter.stack import Stack
 
 
@@ -22,5 +23,7 @@ class Interpreter:
 
     def _interpret(self, lines: list[str]):
         sleep(self.config.delay)
-        stack = Stack(self.commands, self.config)
+        global_env = Environment()
+        global_env.init(self.commands, self.config)
+        stack = Stack(self.commands, self.config, global_env)
         stack.run(lines)

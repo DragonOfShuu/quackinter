@@ -471,7 +471,7 @@
       "x": 2232.60009765625,
       "y": 190.5997314453125,
       "width": 365.79998779296875,
-      "height": 395.4000549316407,
+      "height": 394.2001647949219,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -486,11 +486,16 @@
         "type": 3
       },
       "seed": 1887671199,
-      "version": 356,
-      "versionNonce": 553831505,
+      "version": 515,
+      "versionNonce": 561732543,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1728971414297,
+      "boundElements": [
+        {
+          "id": "cFnD42BJR1Rf_iJVlexba",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1728974409471,
       "link": null,
       "locked": false
     },
@@ -668,8 +673,8 @@
     {
       "id": "ZzzYkicVfA8sgxTuRf_mj",
       "type": "rectangle",
-      "x": 2829.2002563476562,
-      "y": -270.0003242492676,
+      "x": 2801.4002685546875,
+      "y": -275.0003242492676,
       "width": 316.2000732421875,
       "height": 155.59999084472656,
       "angle": 0,
@@ -686,8 +691,8 @@
         "type": 3
       },
       "seed": 1956699583,
-      "version": 542,
-      "versionNonce": 1524352657,
+      "version": 778,
+      "versionNonce": 627716415,
       "isDeleted": false,
       "boundElements": [
         {
@@ -699,15 +704,15 @@
           "id": "SjJBsnk4EkDuLjBpzymlV"
         }
       ],
-      "updated": 1728971465210,
+      "updated": 1728971969094,
       "link": null,
       "locked": false
     },
     {
       "id": "SjJBsnk4EkDuLjBpzymlV",
       "type": "text",
-      "x": 2863.57039642334,
-      "y": -254.7003288269043,
+      "x": 2835.770408630371,
+      "y": -259.7003288269043,
       "width": 247.4597930908203,
       "height": 125,
       "angle": 0,
@@ -722,11 +727,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 484264799,
-      "version": 276,
-      "versionNonce": 27708529,
+      "version": 512,
+      "versionNonce": 1756344671,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1728971465210,
+      "updated": 1728971969094,
       "link": null,
       "locked": false,
       "text": "ALL COMMANDS WILL\nBE GIVEN A COMMAND\nCALLED \"stack_exit\"\nand \"script_exit\" allowing\ncleanup such as this",
@@ -742,10 +747,10 @@
     {
       "id": "0s4wXlhxtcGqwAGa8qErb",
       "type": "arrow",
-      "x": 3130.851761008863,
-      "y": -105.80041885375975,
-      "width": 92.34861740910583,
-      "height": 288.20009231567377,
+      "x": 3116.808542201467,
+      "y": -110.80041885375978,
+      "width": 106.39183621650182,
+      "height": 293.20009231567406,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "transparent",
@@ -760,11 +765,11 @@
         "type": 2
       },
       "seed": 2142304209,
-      "version": 949,
-      "versionNonce": 148248145,
+      "version": 1185,
+      "versionNonce": 59780479,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1728971465210,
+      "updated": 1728971969094,
       "link": null,
       "locked": false,
       "points": [
@@ -773,12 +778,12 @@
           0
         ],
         [
-          62.74851975285583,
-          50.60005569458001
+          76.79173856025182,
+          55.600055694580035
         ],
         [
-          92.34861740910583,
-          288.20009231567377
+          106.39183621650182,
+          293.20009231567406
         ]
       ],
       "lastCommittedPoint": null,
@@ -794,6 +799,128 @@
       },
       "startArrowhead": null,
       "endArrowhead": "arrow"
+    },
+    {
+      "id": "cFnD42BJR1Rf_iJVlexba",
+      "type": "arrow",
+      "x": 2396.4181089952863,
+      "y": 595.3997344970704,
+      "width": 0.32191867001392893,
+      "height": 73.31430053710938,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1701615985,
+      "version": 1656,
+      "versionNonce": 227954303,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1728974745135,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -0.32191867001392893,
+          73.31430053710938
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "OCyZv6r7r1MXONxx2bTcJ",
+        "gap": 10.599838256835938,
+        "focus": 0.11307448232728692
+      },
+      "endBinding": {
+        "elementId": "Q_2KELWruBi7BqKiLIdLT",
+        "gap": 10.399993896484375,
+        "focus": -0.0726987801467283
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "Q_2KELWruBi7BqKiLIdLT",
+      "type": "rectangle",
+      "x": 2232.657021658761,
+      "y": 679.1140289306642,
+      "width": 350.60009765625,
+      "height": 411.400115966797,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1993214833,
+      "version": 965,
+      "versionNonce": 1339331135,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "cFnD42BJR1Rf_iJVlexba",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1728974745134,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "Az2dOTH9cPLOx9m0B1ayi",
+      "type": "text",
+      "x": 2252.4284798758367,
+      "y": 685.0854165213449,
+      "width": 337.35968017578125,
+      "height": 375,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1686337841,
+      "version": 873,
+      "versionNonce": 1206265503,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1728974745135,
+      "link": null,
+      "locked": false,
+      "text": "POTENTIAL EDGE CASE:\n\nConsider the following:\n\nSTRINGDELAY 200\nSTRINGLN Hello World\nREPEAT 2\n\nSure, STRINGDELAY will have \nthe correct delay between chars\non the *first* iteration, but what\nhappens after repeat is ran? By\nthat time the first iteration\nwould've reset the \nSTRINGDELAY. ",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 368,
+      "containerId": null,
+      "originalText": "POTENTIAL EDGE CASE:\n\nConsider the following:\n\nSTRINGDELAY 200\nSTRINGLN Hello World\nREPEAT 2\n\nSure, STRINGDELAY will have \nthe correct delay between chars\non the *first* iteration, but what\nhappens after repeat is ran? By\nthat time the first iteration\nwould've reset the \nSTRINGDELAY. ",
+      "lineHeight": 1.25
     }
   ],
   "appState": {

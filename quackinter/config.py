@@ -9,6 +9,6 @@ class OutputPrint(Protocol):
 @dataclass
 class Config:
     delay: float = 0
-    interval: float | None = None
-    char_interval: float = 0.08
+    interval: int | None = None
+    char_interval: int = 80
     output: OutputPrint = lambda output: None
