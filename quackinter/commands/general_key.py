@@ -23,15 +23,20 @@ all_cmds = ['accept', 'alt', 'altleft', 'altright', 'apps', 'backspace',
 # fmt: on
 
 
-class ModifierKey(Command):
+class GeneralKey(Command):
     conversion_chart = {
         "CONTROL": "CTRL",
         "WINDOWS": "WIN",
         "GUI": "WIN",
         "APP": "APPS",
         "MENU": "APPS",
+        "UPARROW": "UP",
+        "DOWNARROW": "DOWN",
+        "LEFTARROW": "LEFT",
+        "RIGHTARROW": "RIGHT",
+        "GLOBE": "FN",
     }
-    names = [*conversion_chart.keys(), *all_cmds]
+    names = [*conversion_chart.keys(), *[cmd.upper() for cmd in all_cmds]]
 
     @classmethod
     def _normalize_cmd(cls, cmd: str) -> list[str]:
