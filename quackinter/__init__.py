@@ -1,20 +1,16 @@
-from quackinter.quackinter import interpret
-from quackinter.interpreter import Interpreter
+from quackinter.quackinter import interpret as interpret
+from quackinter.interpreter import Interpreter as Interpreter
+from quackinter.config import Config as Config
+from quackinter.environment import Environment as Environment
+from quackinter.key_injector import KeyInjector as KeyInjector
+from quackinter.sanitizer import Sanitizer as Sanitizer
 
 from quackinter.errors import (
-    QuackinterError,
-    InterpretationError,
-    CommandNotDefinedError,
-    OutsideContextError,
-    NotANumberError,
+    QuackinterError as QuackinterError,
+    InterpretationError as InterpretationError,
+    CommandNotDefinedError as CommandNotDefinedError,
+    OutsideContextError as OutsideContextError,
+    NotANumberError as NotANumberError,
 )
 
-__all__ = [
-    "interpret",
-    "Interpreter",
-    "QuackinterError",
-    "InterpretationError",
-    "CommandNotDefinedError",
-    "OutsideContextError",
-    "NotANumberError",
-]
+from quackinter.commands import *  # noqa: F403

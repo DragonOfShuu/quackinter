@@ -2,7 +2,7 @@ from time import sleep
 
 from quackinter.commands.command import Command
 from quackinter.config import Config
-from quackinter.commands import commands as built_in_ducky_commands
+from quackinter.commands import command_list as built_in_ducky_commands
 from quackinter.environment import Environment
 from quackinter.stack import Stack
 
