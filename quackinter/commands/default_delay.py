@@ -20,4 +20,6 @@ class DefaultDelay(Command):
     @classmethod
     def global_environment_init(cls, environment: Environment, config: Config) -> None:
         environment.global_vars[cls.GLOBAL_ENV_NAME] = config.interval or 0
-        environment.global_vars[cls.GLOBAL_ENV_OVERRIDE_NAME] = config.interval is not None
+        environment.global_vars[cls.GLOBAL_ENV_OVERRIDE_NAME] = (
+            config.interval is not None
+        )

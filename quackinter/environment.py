@@ -11,7 +11,8 @@ class Environment:
     gets and sets, whilst also allowing
     you to create extensions of the heap.
     """
-    def __init__(self, previous_env: Environment|None = None):
+
+    def __init__(self, previous_env: Environment | None = None):
         self.previous_env = previous_env
         self.vars: dict[str, Any] = {}
         if self.previous_env:
@@ -39,10 +40,10 @@ class Environment:
         successful_edit = self.edit_var(name, val)
         if successful_edit:
             return False
-        
+
         self.vars[name] = val
         return True
-    
+
     def remove_var(self, name: str) -> bool:
         """
         Remove a variable from the environment,
@@ -52,19 +53,19 @@ class Environment:
         if name in self.vars:
             self.vars.pop(name)
             return True
-        
+
         if self.previous_env:
             return self.previous_env.remove_var(name)
 
         return False
-    
+
     def extend(self):
         """
         Extend this environment by returning
         a new environment.
         """
         return Environment(self)
-    
+
     def init(self, commands: list[Command], config: Config):
         """
         Initialize the given commands, and have

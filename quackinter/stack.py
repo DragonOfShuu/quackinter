@@ -10,7 +10,12 @@ from quackinter.errors import CommandNotDefinedError, InterpretationError
 
 
 class Stack:
-    def __init__(self, commands: list[Command], config: Config, old_enviro: Environment|None = None) -> None:
+    def __init__(
+        self,
+        commands: list[Command],
+        config: Config,
+        old_enviro: Environment | None = None,
+    ) -> None:
         self.commands = commands
         self.config = config
         self.context: StackContext | None = None

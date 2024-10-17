@@ -8,7 +8,9 @@ from quackinter.environment import Environment
 
 
 class StackContext:
-    def __init__(self, ducky: list[str], config: Config, old_context: StackContext|None = None) -> None:
+    def __init__(
+        self, ducky: list[str], config: Config, old_context: StackContext | None = None
+    ) -> None:
         self._ducky_code = ducky
         self._current_line = 0
         self.config = config
@@ -24,7 +26,7 @@ class StackContext:
         for index, line in enumerate(self._ducky_code):
             # Separated for readability
             yield (index, line)
-            sleep(self.environment.global_vars['_DEFAULT_DELAY'])
+            sleep(self.environment.global_vars["_DEFAULT_DELAY"])
             self._current_line += 1
 
     def __iter__(self):
