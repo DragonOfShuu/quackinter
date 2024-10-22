@@ -29,8 +29,10 @@ class NotANumberError(InterpretationError):
 class KeyNotExistError(InterpretationError):
     pass
 
+
 class InvalidArgError(InterpretationError):
     pass
+
 
 class UnsupportedError(InterpretationError):
     pass

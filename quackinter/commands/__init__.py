@@ -17,5 +17,5 @@ command_list: list[type[Command]] = [
     String,
     StringLn,
     SysRq,
-    WaitForButtonPress
+    WaitForButtonPress,
 ]
