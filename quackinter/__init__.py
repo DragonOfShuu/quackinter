@@ -11,6 +11,8 @@ from quackinter.errors import (
     CommandNotDefinedError as CommandNotDefinedError,
     OutsideContextError as OutsideContextError,
     NotANumberError as NotANumberError,
+    InvalidArgError as InvalidArgError,
+    UnsupportedError as UnsupportedError,
 )
 
 from quackinter.commands import *  # noqa: F403
