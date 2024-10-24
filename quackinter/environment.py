@@ -73,3 +73,14 @@ class Environment:
         """
         for cmd in commands:
             cmd.global_environment_init(self, config)
+
+    @classmethod
+    def create_global(cls):
+        return cls()
+
+    def __enter__(self):
+        if self.previous_env is None:
+            return
+    
+    def __exit__(self):
+        pass
