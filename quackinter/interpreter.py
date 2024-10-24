@@ -10,11 +10,11 @@ from quackinter.stack import Stack
 class Interpreter:
     def __init__(
         self,
-        extended_commands: list[Command] | None = None,
+        extended_commands: list[type[Command]] | None = None,
         config: Config | None = None,
     ) -> None:
         self.extended_commands = extended_commands or []
-        self.commands = [*self.extended_commands, *built_in_ducky_commands]
+        self.commands = [cmd() for cmd in (*self.extended_commands, *built_in_ducky_commands)]
         self.config = Config() if not config else config
 
     def interpret_text(self, text: str):
@@ -23,7 +23,6 @@ class Interpreter:
 
     def _interpret(self, lines: list[str]):
         sleep(self.config.delay)
-        global_env = Environment()
-        global_env.init(self.commands, self.config)
-        stack = Stack(self.commands, self.config, global_env)
-        stack.run(lines)
+        with Environment.create_global(self.commands, self.config) as global_env:
+            stack = Stack(self.commands, self.config, global_env)
+            stack.run(lines)

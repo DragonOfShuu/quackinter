@@ -18,6 +18,9 @@ class InterpretationError(QuackinterError):
         self.contexts.append(new_context)
 
 
+class EnvironmentNotIniatedError(InterpretationError):
+    pass
+
 class CommandNotDefinedError(InterpretationError):
     pass
 

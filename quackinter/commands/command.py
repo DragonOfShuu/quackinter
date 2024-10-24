@@ -35,3 +35,7 @@ class Command(ABC):
     @classmethod
     def global_environment_init(cls, environment: Environment, config: Config) -> None:
         pass
+
+    @classmethod
+    def global_environment_exit(cls, environment: Environment, config: Config) -> None:
+        pass

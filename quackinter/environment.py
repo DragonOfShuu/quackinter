@@ -3,6 +3,7 @@ from typing import Any
 
 from quackinter.commands.command import Command
 from quackinter.config import Config
+from quackinter.errors import EnvironmentNotIniatedError
 
 
 class Environment:
@@ -16,9 +17,13 @@ class Environment:
         self.previous_env = previous_env
         self.vars: dict[str, Any] = {}
         if self.previous_env:
-            self.global_vars = self.previous_env.global_vars
+            self.global_vars: dict[str, Any] = self.previous_env.global_vars
+            self.commands: list[Command]|None = self.previous_env.commands
+            self.config: Config|None = self.previous_env.config
         else:
-            self.global_vars: dict[str, Any] = {}
+            self.global_vars = {}
+            self.commands = None
+            self.config = None
 
     def edit_var(self, name: str, val: Any) -> bool:
         """
@@ -66,21 +71,33 @@ class Environment:
         """
         return Environment(self)
 
-    def init(self, commands: list[Command], config: Config):
+    def _global_init(self, commands: list[Command], config: Config):
         """
         Initialize the given commands, and have
         this be the global environment.
         """
-        for cmd in commands:
+        self.commands = commands
+        for cmd in self.commands:
             cmd.global_environment_init(self, config)
+    
+    def _global_exit(self):
+        if self.commands is None or self.config is None: 
+            raise EnvironmentNotIniatedError("Environment was supposed to exit but instead does not exist.") 
+        for cmd in self.commands:
+            cmd.global_environment_exit(self, self.config)
 
     @classmethod
-    def create_global(cls):
-        return cls()
+    def create_global(cls, commands: list[Command], config: Config):
+        new_global = cls()
+        new_global._global_init(commands, config)
+        return new_global
 
     def __enter__(self):
         if self.previous_env is None:
             return
     
-    def __exit__(self):
-        pass
+    def __exit__(self, exc_type: type[Exception], exc_value: str, exc_traceback: str):
+        # General environment closing statement
+
+        if self.previous_env is None:
+            self._global_exit()
