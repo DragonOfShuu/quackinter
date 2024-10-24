@@ -40,7 +40,7 @@ MediaArgType = Literal[
 ]
 
 
-class Media(Command):
+class MediaCommand(Command):
     subcommands = list(get_args(MediaArgType))
 
     @classmethod

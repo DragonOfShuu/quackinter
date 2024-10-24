@@ -4,7 +4,7 @@ from quackinter.environment import Environment
 from quackinter.stack_context import StackContext
 
 
-class DefaultDelay(Command):
+class DefaultDelayCommand(Command):
     names = ["DEFAULT_DELAY", "DEFAULTDELAY"]
     GLOBAL_ENV_NAME = "_DEFAULT_DELAY"
     GLOBAL_ENV_OVERRIDE_NAME = "_DEFAULT_DELAY_OVERIDDEN"

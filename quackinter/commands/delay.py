@@ -4,7 +4,7 @@ from quackinter.commands.command import Command
 from quackinter.stack_context import StackContext
 
 
-class Delay(Command):
+class DelayCommand(Command):
     names = ["DELAY"]
 
     @classmethod

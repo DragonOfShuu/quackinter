@@ -4,7 +4,7 @@ from quackinter.stack_context import StackContext
 from quackinter.key_injector import KeyInjector
 
 
-class SysRq(Command):
+class SysRqCommand(Command):
     @classmethod
     def execute(cls, context: StackContext, cmd: str, data: str) -> None:
         key_injector = KeyInjector(context)

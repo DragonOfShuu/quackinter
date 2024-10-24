@@ -23,7 +23,7 @@ all_cmds = ['accept', 'alt', 'altleft', 'altright', 'apps', 'backspace',
 # fmt: on
 
 
-class GeneralKey(Command):
+class GeneralKeyCommand(Command):
     conversion_chart = {
         "CONTROL": "CTRL",
         "WINDOWS": "WIN",

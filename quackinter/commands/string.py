@@ -3,7 +3,7 @@ from quackinter.stack_context import StackContext
 from quackinter.key_injector import KeyInjector
 
 
-class String(Command):
+class StringCommand(Command):
     names = ["STRING"]
 
     @classmethod

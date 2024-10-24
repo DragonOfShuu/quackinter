@@ -2,7 +2,7 @@ from quackinter.commands.command import Command
 from quackinter.stack_context import StackContext
 
 
-class Rem(Command):
+class RemCommand(Command):
     names = ["REM"]
 
     @classmethod

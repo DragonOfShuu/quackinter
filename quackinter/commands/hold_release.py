@@ -5,7 +5,7 @@ from quackinter.stack_context import StackContext
 
 import pyautogui as pyag
 
-class HoldRelease(Command):
+class HoldReleaseCommand(Command):
     HELD_KEYS_KEY = "HELD_KEYS"
     names = ["RELEASE", "HOLD"]
 
