@@ -24,5 +24,5 @@ class Interpreter:
     def _interpret(self, lines: list[str]):
         sleep(self.config.delay)
         with Environment.create_global(self.commands, self.config) as global_env:
-            stack = Stack(self.commands, self.config, global_env)
+            stack = Stack(global_env)
             stack.run(lines)

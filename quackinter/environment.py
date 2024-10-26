@@ -1,10 +1,16 @@
 from __future__ import annotations
 from typing import Any
+from dataclasses import dataclass, field
 
 from quackinter.commands.command import Command
 from quackinter.config import Config
 from quackinter.errors import EnvironmentNotIniatedError
 
+@dataclass
+class GlobalEnvironmentData:
+    commands: list[Command]
+    config: Config
+    global_vars: dict[str, Any] = field(default_factory=dict)
 
 class Environment:
     """
@@ -13,17 +19,16 @@ class Environment:
     you to create extensions of the heap.
     """
 
-    def __init__(self, previous_env: Environment | None = None):
-        self.previous_env = previous_env
-        self.vars: dict[str, Any] = {}
-        if self.previous_env:
-            self.global_vars: dict[str, Any] = self.previous_env.global_vars
-            self.commands: list[Command]|None = self.previous_env.commands
-            self.config: Config|None = self.previous_env.config
+    def __init__(self, data: Environment | GlobalEnvironmentData):
+        if isinstance(data, Environment):
+            self.previous_env = data
         else:
-            self.global_vars = {}
-            self.commands = None
-            self.config = None
+            self.previous_env = None
+
+        self.vars: dict[str, Any] = {}
+        self.global_vars: dict[str, Any] = data.global_vars
+        self.commands: list[Command] = data.commands
+        self.config: Config = data.config
 
     def edit_var(self, name: str, val: Any) -> bool:
         """
@@ -71,25 +76,25 @@ class Environment:
         """
         return Environment(self)
 
-    def _global_init(self, commands: list[Command], config: Config):
+    def _global_init(self):
         """
         Initialize the given commands, and have
         this be the global environment.
         """
-        self.commands = commands
         for cmd in self.commands:
-            cmd.global_environment_init(self, config)
+            cmd.global_environment_init(self)
     
     def _global_exit(self):
         if self.commands is None or self.config is None: 
             raise EnvironmentNotIniatedError("Environment was supposed to exit but instead does not exist.") 
         for cmd in self.commands:
-            cmd.global_environment_exit(self, self.config)
+            cmd.global_environment_exit(self)
 
     @classmethod
     def create_global(cls, commands: list[Command], config: Config):
-        new_global = cls()
-        new_global._global_init(commands, config)
+        global_data = GlobalEnvironmentData(commands, config)
+        new_global = cls(global_data)
+        new_global._global_init()
         return new_global
 
     def __enter__(self):

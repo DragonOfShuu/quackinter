@@ -1,5 +1,4 @@
 from quackinter.commands.command import Command
-from quackinter.config import Config
 from quackinter.environment import Environment
 from quackinter.stack_context import StackContext
 
@@ -14,11 +13,11 @@ class HoldReleaseCommand(Command):
         return environment.global_vars[cls.HELD_KEYS_KEY]
 
     @classmethod
-    def global_environment_init(cls, environment: Environment, config: Config) -> None:
+    def global_environment_init(cls, environment: Environment) -> None:
         environment.global_vars[cls.HELD_KEYS_KEY] = []
 
     @classmethod
-    def global_environment_exit(cls, environment: Environment, config: Config) -> None:
+    def global_environment_exit(cls, environment: Environment) -> None:
         keys: list[str] = cls._get_keys(environment)
         cls._release_keys(environment, keys)
 

@@ -12,37 +12,38 @@ from quackinter.errors import CommandNotDefinedError, InterpretationError
 class Stack:
     def __init__(
         self,
-        commands: list[Command],
-        config: Config,
-        old_enviro: Environment | None = None,
+        environment: Environment,
     ) -> None:
-        self.commands = commands
-        self.config = config
+        self.config = environment.config
         self.context: StackContext | None = None
-        self.old_stack = old_enviro
-        if old_enviro:
-            self.environment = old_enviro.extend()
+        self.old_enviro = environment
+        if environment:
+            self.environment = environment.extend()
         else:
             self.environment = Environment()
 
     def run(self, ducky: list[str]) -> str | None:
         clean_ducky = Sanitizer.sanitize_lines(ducky)
-        self.context = StackContext(clean_ducky, self.config)
+        self.context = StackContext(clean_ducky, self.environment, self)
         for i in self.context:
-            cmd_str, data = extract_cmd(i[1])
+            cmd_str, data = extract_cmd(i.line)
             command = self._find_command(cmd_str, data)
-            if not command:
-                raise CommandNotDefinedError(i[0], self.context)
 
             try:
+                if not command:
+                    raise CommandNotDefinedError(f"{cmd_str} is not a command.")
+
                 command.execute(self.context, cmd_str, data)
             except InterpretationError as ie:
                 ie.add_context(self.context)
                 raise ie
 
     def _find_command(self, cmd: str, data: str) -> Command | None:
-        for i in self.commands:
+        for i in self.environment.commands: # type: ignore
             if i.is_this_command(cmd, data):
                 return i
-        # Readability
         return None
+
+    def new_stack(self):
+        return Stack(self.environment)
+    
