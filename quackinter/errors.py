@@ -25,6 +25,7 @@ class InterpretationSyntaxError(InterpretationError):
 class EnvironmentNotIniatedError(InterpretationError):
     pass
 
+
 class CommandNotDefinedError(InterpretationError):
     pass
 

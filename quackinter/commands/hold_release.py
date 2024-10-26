@@ -4,6 +4,7 @@ from quackinter.stack_context import StackContext
 
 import pyautogui as pyag
 
+
 class HoldReleaseCommand(Command):
     HELD_KEYS_KEY = "HELD_KEYS"
     names = ["RELEASE", "HOLD"]
@@ -38,7 +39,7 @@ class HoldReleaseCommand(Command):
     @classmethod
     def execute(cls, context: StackContext, cmd: str, data: str) -> None:
         command = cmd.upper()
-        keys = [key for key in data.strip().split(' ') if key.strip()]
+        keys = [key for key in data.strip().split(" ") if key.strip()]
 
         if command == "HOLD":
             cls._hold_keys(context.environment, keys)

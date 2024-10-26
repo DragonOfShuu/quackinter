@@ -14,7 +14,9 @@ class Interpreter:
         config: Config | None = None,
     ) -> None:
         self.extended_commands = extended_commands or []
-        self.commands = [cmd() for cmd in (*self.extended_commands, *built_in_ducky_commands)]
+        self.commands = [
+            cmd() for cmd in (*self.extended_commands, *built_in_ducky_commands)
+        ]
         self.config = Config() if not config else config
 
     def interpret_text(self, text: str):

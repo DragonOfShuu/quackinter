@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from quackinter.commands.command import Command
-from quackinter.config import Config
 from quackinter.environment import Environment
 from quackinter.stack_context import StackContext
 from quackinter.sanitizer import Sanitizer
@@ -39,11 +38,10 @@ class Stack:
                 raise ie
 
     def _find_command(self, cmd: str, data: str) -> Command | None:
-        for i in self.environment.commands: # type: ignore
+        for i in self.environment.commands:  # type: ignore
             if i.is_this_command(cmd, data):
                 return i
         return None
 
     def new_stack(self):
         return Stack(self.environment)
-    

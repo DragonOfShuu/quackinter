@@ -6,11 +6,13 @@ from quackinter.commands.command import Command
 from quackinter.config import Config
 from quackinter.errors import EnvironmentNotIniatedError
 
+
 @dataclass
 class GlobalEnvironmentData:
     commands: list[Command]
     config: Config
     global_vars: dict[str, Any] = field(default_factory=dict)
+
 
 class Environment:
     """
@@ -83,10 +85,12 @@ class Environment:
         """
         for cmd in self.commands:
             cmd.global_environment_init(self)
-    
+
     def _global_exit(self):
-        if self.commands is None or self.config is None: 
-            raise EnvironmentNotIniatedError("Environment was supposed to exit but instead does not exist.") 
+        if self.commands is None or self.config is None:
+            raise EnvironmentNotIniatedError(
+                "Environment was supposed to exit but instead does not exist."
+            )
         for cmd in self.commands:
             cmd.global_environment_exit(self)
 
@@ -100,7 +104,7 @@ class Environment:
     def __enter__(self):
         if self.previous_env is None:
             return
-    
+
     def __exit__(self, exc_type: type[Exception], exc_value: str, exc_traceback: str):
         # General environment closing statement
 
