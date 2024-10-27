@@ -22,7 +22,7 @@ class InterpretationSyntaxError(InterpretationError):
     pass
 
 
-class EnvironmentNotIniatedError(InterpretationError):
+class NotInitiatedError(InterpretationError):
     pass
 
 

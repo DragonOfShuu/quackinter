@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from quackinter.environment import Environment
-from quackinter.stack_context import StackContext
+from quackinter.stack import Stack
 from quackinter.errors import NotANumberError
 
 
@@ -10,7 +10,7 @@ class Command(ABC):
 
     @classmethod
     @abstractmethod
-    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
+    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
         pass
 
     @classmethod

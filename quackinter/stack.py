@@ -3,9 +3,12 @@ from __future__ import annotations
 from quackinter.commands.command import Command
 from quackinter.environment import Environment
 from quackinter.stack_context import StackContext
-from quackinter.sanitizer import Sanitizer
 from quackinter.utils import extract_cmd
-from quackinter.errors import CommandNotDefinedError, InterpretationError
+from quackinter.errors import (
+    CommandNotDefinedError,
+    InterpretationError,
+    NotInitiatedError,
+)
 
 
 class Stack:
@@ -14,7 +17,7 @@ class Stack:
         environment: Environment,
     ) -> None:
         self.config = environment.config
-        self.context: StackContext | None = None
+        self._context: StackContext | None = None
         self.old_enviro = environment
         if environment:
             self.environment = environment.extend()
@@ -22,19 +25,18 @@ class Stack:
             self.environment = Environment()
 
     def run(self, ducky: list[str]) -> str | None:
-        clean_ducky = Sanitizer.sanitize_lines(ducky)
-        self.context = StackContext(clean_ducky, self.environment, self)
-        for i in self.context:
-            cmd_str, data = extract_cmd(i.line)
+        self._context = StackContext(ducky, self.environment, self)
+        for line in self._context:
+            cmd_str, data = extract_cmd(line.line)
             command = self._find_command(cmd_str, data)
 
             try:
                 if not command:
                     raise CommandNotDefinedError(f"{cmd_str} is not a command.")
 
-                command.execute(self.context, cmd_str, data)
+                command.execute(self, cmd_str, data)
             except InterpretationError as ie:
-                ie.add_context(self.context)
+                ie.add_context(self._context)
                 raise ie
 
     def _find_command(self, cmd: str, data: str) -> Command | None:
@@ -45,3 +47,9 @@ class Stack:
 
     def new_stack(self):
         return Stack(self.environment)
+
+    @property
+    def context(self):
+        if self._context is None:
+            raise NotInitiatedError("Stack was not initiated")
+        return self._context

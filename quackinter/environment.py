@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 from quackinter.commands.command import Command
 from quackinter.config import Config
-from quackinter.errors import EnvironmentNotIniatedError
+from quackinter.errors import NotInitiatedError
 
 
 @dataclass
@@ -88,7 +88,7 @@ class Environment:
 
     def _global_exit(self):
         if self.commands is None or self.config is None:
-            raise EnvironmentNotIniatedError(
+            raise NotInitiatedError(
                 "Environment was supposed to exit but instead does not exist."
             )
         for cmd in self.commands:

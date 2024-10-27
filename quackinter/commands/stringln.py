@@ -1,5 +1,5 @@
 from quackinter.commands.command import Command
-from quackinter.stack_context import StackContext
+from quackinter.stack import Stack
 from quackinter.key_injector import KeyInjector
 
 
@@ -7,6 +7,6 @@ class StringLnCommand(Command):
     names = ["STRINGLN"]
 
     @classmethod
-    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
-        injector = KeyInjector(context)
+    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+        injector = KeyInjector(stack.config)
         injector.write(f"{data}\n")

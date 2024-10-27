@@ -1,6 +1,6 @@
 from quackinter.commands.command import Command
 from quackinter.environment import Environment
-from quackinter.stack_context import StackContext
+from quackinter.stack import Stack
 
 import pyautogui as pyag
 
@@ -37,11 +37,11 @@ class HoldReleaseCommand(Command):
             keys.append(key)
 
     @classmethod
-    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
+    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
         command = cmd.upper()
         keys = [key for key in data.strip().split(" ") if key.strip()]
 
         if command == "HOLD":
-            cls._hold_keys(context.environment, keys)
+            cls._hold_keys(stack.environment, keys)
         else:
-            cls._release_keys(context.environment, keys)
+            cls._release_keys(stack.environment, keys)

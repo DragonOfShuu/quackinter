@@ -1,5 +1,5 @@
 from quackinter.commands.command import Command
-from quackinter.stack_context import StackContext
+from quackinter.stack import Stack
 from quackinter.key_injector import KeyInjector
 
 # fmt: off
@@ -61,8 +61,8 @@ class GeneralKeyCommand(Command):
         return all(cmd.lower() in KeyInjector.ACCEPTED_KEYS for cmd in normalized[1:])
 
     @classmethod
-    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
-        key_injector = KeyInjector(context)
+    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+        key_injector = KeyInjector(stack.config)
         norm_cmd = cls._normalize_cmd(cmd)
 
         norm_data = data.strip().split(" ")

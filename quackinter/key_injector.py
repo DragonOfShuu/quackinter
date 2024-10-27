@@ -1,5 +1,5 @@
 import typing
-from quackinter.stack_context import StackContext
+from quackinter.config import Config
 
 import pyautogui as pyag
 
@@ -36,8 +36,8 @@ accepted_keys = typing.get_args(AcceptedKeysType)
 class KeyInjector:
     ACCEPTED_KEYS = accepted_keys
 
-    def __init__(self, context: StackContext):
-        self.context = context
+    def __init__(self, config: Config):
+        self.config = config
 
     @classmethod
     def is_key(cls, key: str):
@@ -54,16 +54,16 @@ class KeyInjector:
         return new_key
 
     def press(self, key: str):
-        pyag.press(self._verify_key(key), interval=self.context.config.char_interval)
+        pyag.press(self._verify_key(key), interval=self.config.char_interval)
 
     def write(self, text: str):
-        pyag.write(text, interval=self.context.config.char_interval)
+        pyag.write(text, interval=self.config.char_interval)
 
     def hotkey(self, hotkeys: list[str]):
         keys = [(key.lower() if len(key) > 1 else key) for key in hotkeys if key]
         pyag.hotkey(
             *[self._verify_key(key) for key in keys],
-            interval=self.context.config.char_interval,
+            interval=self.config.char_interval,
         )
 
     def hold(self, key: str | list[str]):

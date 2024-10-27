@@ -1,6 +1,7 @@
 from quackinter.commands.command import Command
+from quackinter.config import Config
 from quackinter.errors import InvalidArgError, UnsupportedError
-from quackinter.stack_context import StackContext
+from quackinter.stack import Stack
 from quackinter.key_injector import KeyInjector
 
 from typing import Literal, get_args, cast
@@ -44,24 +45,24 @@ class MediaCommand(Command):
     subcommands = list(get_args(MediaArgType))
 
     @classmethod
-    def execute(cls, context: StackContext, cmd: str, data: str) -> None:
+    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
         clean_data: MediaArgType = cast(MediaArgType, data.strip().upper())
         if clean_data not in cls.subcommands:
             raise InvalidArgError(
                 f'"{data.strip()}" is not an acceptible arg. Accepted args for MEDIA: {', '.join(cls.subcommands)}'
             )
 
-        media_argument = MediaArgument(context)
+        media_argument = MediaArgument(stack.config)
         media_method = getattr(MediaArgument, clean_data.lower())
         media_method(media_argument)
 
 
 class MediaArgument:
-    def __init__(self, context: StackContext):
+    def __init__(self, config: Config):
         self.is_windows = pf.uname()[0] == "Windows"
         self.is_mac = pf.uname()[0] == "Darwin"
         self.is_linux = pf.uname()[0] == "Linux"
-        self.key_injector = KeyInjector(context)
+        self.key_injector = KeyInjector(config)
 
     def power(self):
         if self.is_windows:
