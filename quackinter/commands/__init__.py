@@ -1,6 +1,7 @@
 from quackinter.commands.command import Command
 
 from quackinter.commands.altchar import AltCharCommand
+from quackinter.commands.altstring import AltStringCommand
 from quackinter.commands.default_delay import DefaultDelayCommand
 from quackinter.commands.delay import DelayCommand
 from quackinter.commands.general_key import GeneralKeyCommand
@@ -15,6 +16,7 @@ from quackinter.commands.wait_for_button_press import WaitForButtonPressCommand
 
 command_list: list[type[Command]] = [
     AltCharCommand,
+    AltStringCommand,
     DefaultDelayCommand,
     DelayCommand,
     GeneralKeyCommand,
