@@ -4,7 +4,7 @@ from quackinter.stack import Stack
 
 
 class DefaultStringDelay(Command):
-    names = ['DEFAULT_STRING_DELAY', 'DEFAULTSTRINGDELAY']
+    names = ["DEFAULT_STRING_DELAY", "DEFAULTSTRINGDELAY"]
 
     GLOBAL_ENV_NAME = "_DEFAULT_STRING_DELAY"
     GLOBAL_ENV_OVERRIDE_NAME = "_DEFAULT_STRING_DELAY_OVERIDDEN"
@@ -22,4 +22,3 @@ class DefaultStringDelay(Command):
         environment.global_vars[cls.GLOBAL_ENV_OVERRIDE_NAME] = (
             environment.config.interval is not None
         )
- 

@@ -21,4 +21,3 @@ class DefaultDelayCommand(Command):
         environment.global_vars[cls.GLOBAL_ENV_OVERRIDE_NAME] = (
             environment.config.interval is not None
         )
- 

@@ -94,7 +94,7 @@ class Environment:
             )
         for cmd in self.commands:
             cmd.global_environment_exit(self)
-    
+
     def is_global(self):
         return self.previous_env is None
 
