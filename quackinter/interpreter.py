@@ -15,7 +15,7 @@ class Interpreter:
     ) -> None:
         self.extended_commands = extended_commands or []
         self.commands = [
-            cmd() for cmd in (*self.extended_commands, *built_in_ducky_commands)
+            *self.extended_commands, *built_in_ducky_commands
         ]
         self.config = Config() if not config else config
 

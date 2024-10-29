@@ -50,9 +50,8 @@ class GeneralKeyCommand(Command):
             (lowered.lower() if len(lowered) > 1 else lowered) for lowered in new_cmd
         ]
 
-    @classmethod
-    def is_this_command(cls, name: str, data: str) -> bool:
-        normalized = cls._normalize_cmd(name)
+    def is_this_command(self, name: str, data: str) -> bool:
+        normalized = self._normalize_cmd(name)
 
         # Verify first cmd is in our major list
         if normalized[0] not in all_cmds:
@@ -60,14 +59,13 @@ class GeneralKeyCommand(Command):
 
         return all(cmd.lower() in KeyInjector.ACCEPTED_KEYS for cmd in normalized[1:])
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
-        key_injector = KeyInjector(stack.config)
-        norm_cmd = cls._normalize_cmd(cmd)
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
+        key_injector = KeyInjector(stack.environment)
+        norm_cmd = self._normalize_cmd(cmd)
 
         norm_data = data.strip().split(" ")
         new_cmd_list = []
         for data_cmd in norm_data:
-            new_cmd_list.extend(cls._normalize_cmd(data_cmd))
+            new_cmd_list.extend(self._normalize_cmd(data_cmd))
 
         key_injector.hotkey([*norm_cmd, *new_cmd_list])

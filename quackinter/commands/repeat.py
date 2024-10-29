@@ -6,8 +6,7 @@ from quackinter.stack import Stack
 class RepeatCommand(Command):
     names = ["REPEAT"]
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
         line = stack.context.get_line_offset(1)
         if line is None:
             raise InterpretationSyntaxError("There must be a line before repeat to run")

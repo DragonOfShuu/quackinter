@@ -29,6 +29,7 @@ class Stack:
         for line in self._context:
             cmd_str, data = extract_cmd(line.line)
             command = self._find_command(cmd_str, data)
+            line.command = command
 
             try:
                 if not command:

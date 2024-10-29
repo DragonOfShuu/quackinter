@@ -1,5 +1,5 @@
 from quackinter.commands.command import Command
-from quackinter.config import Config
+from quackinter.environment import Environment
 from quackinter.errors import InvalidArgError, UnsupportedError
 from quackinter.stack import Stack
 from quackinter.key_injector import KeyInjector
@@ -44,25 +44,24 @@ MediaArgType = Literal[
 class MediaCommand(Command):
     subcommands = list(get_args(MediaArgType))
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
         clean_data: MediaArgType = cast(MediaArgType, data.strip().upper())
-        if clean_data not in cls.subcommands:
+        if clean_data not in self.subcommands:
             raise InvalidArgError(
-                f'"{data.strip()}" is not an acceptible arg. Accepted args for MEDIA: {', '.join(cls.subcommands)}'
+                f'"{data.strip()}" is not an acceptible arg. Accepted args for MEDIA: {', '.join(self.subcommands)}'
             )
 
-        media_argument = MediaArgument(stack.config)
+        media_argument = MediaArgument(stack.environment)
         media_method = getattr(MediaArgument, clean_data.lower())
         media_method(media_argument)
 
 
 class MediaArgument:
-    def __init__(self, config: Config):
+    def __init__(self, environment: Environment):
         self.is_windows = pf.uname()[0] == "Windows"
         self.is_mac = pf.uname()[0] == "Darwin"
         self.is_linux = pf.uname()[0] == "Linux"
-        self.key_injector = KeyInjector(config)
+        self.key_injector = KeyInjector(environment)
 
     def power(self):
         if self.is_windows:

@@ -42,9 +42,8 @@ class AltStringCommand(Command):
             for num in code:
                 injector.press(f"num{num}")
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
-        codes = cls.convert_text(data)
-        injector = KeyInjector(stack.config)
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
+        codes = self.convert_text(data)
+        injector = KeyInjector(stack.environment)
         for code in codes:
-            cls.type_code(code, injector)
+            self.type_code(code, injector)

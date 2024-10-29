@@ -7,15 +7,35 @@ from quackinter.errors import NotANumberError
 
 class Command(ABC):
     names = ["BASE"]
+    ignore: bool = False
+    """
+    If we should not add this command
+    to the "generated_lines"
+    """
+    include_with_repeat = False
+    """
+    True if this command should be included
+    when repeat runs the command above.
 
-    @classmethod
+    Example:
+    ```
+    STRINGDELAY 1000
+    STRINGLN Hello World
+    REPEAT 10
+    ```
+    STRINGDELAY needs to run every single repeat so that it takes
+    one second between each character on every single REPEAT.
+    """
+
+    def __init__(self, environment: Environment) -> None:
+        self.global_env = environment
+
     @abstractmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
         pass
 
-    @classmethod
-    def is_this_command(cls, name: str, data: str) -> bool:
-        return name.upper() in cls.names
+    def is_this_command(self, name: str, data: str) -> bool:
+        return name.upper() in self.names
 
     @staticmethod
     def convert_float(data: str):
@@ -31,10 +51,8 @@ class Command(ABC):
         except ValueError:
             raise NotANumberError(f"Value '{data}' is not an integer.")
 
-    @classmethod
-    def global_environment_init(cls, environment: Environment) -> None:
+    def global_environment_init(self, environment: Environment) -> None:
         pass
 
-    @classmethod
-    def global_environment_exit(cls, environment: Environment) -> None:
+    def global_environment_exit(self, environment: Environment) -> None:
         pass

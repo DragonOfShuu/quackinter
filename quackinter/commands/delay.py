@@ -7,6 +7,5 @@ from quackinter.stack import Stack
 class DelayCommand(Command):
     names = ["DELAY"]
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
-        sleep(cls.convert_float(data))
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
+        sleep(self.convert_float(data))

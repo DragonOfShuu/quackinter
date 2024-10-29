@@ -4,7 +4,7 @@ from quackinter.stack import Stack
 
 class RemCommand(Command):
     names = ["REM"]
+    ignore = True
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
         stack.config.output(data)

@@ -9,7 +9,7 @@ from quackinter.errors import NotInitiatedError
 
 @dataclass
 class GlobalEnvironmentData:
-    commands: list[Command]
+    commands: list[type[Command]]
     config: Config
     global_vars: dict[str, Any] = field(default_factory=dict)
 
@@ -22,15 +22,16 @@ class Environment:
     """
 
     def __init__(self, data: Environment | GlobalEnvironmentData):
-        if isinstance(data, Environment):
-            self.previous_env = data
-        else:
-            self.previous_env = None
-
         self.vars: dict[str, Any] = {}
         self.global_vars: dict[str, Any] = data.global_vars
-        self.commands: list[Command] = data.commands
         self.config: Config = data.config
+
+        if isinstance(data, Environment):
+            self.previous_env = data
+            self.commands: list[Command] = data.commands
+        else:
+            self.previous_env = None
+            self.commands = [cmd(self) for cmd in data.commands]
 
     def edit_var(self, name: str, val: Any) -> bool:
         """
@@ -93,9 +94,12 @@ class Environment:
             )
         for cmd in self.commands:
             cmd.global_environment_exit(self)
+    
+    def is_global(self):
+        return self.previous_env is None
 
     @classmethod
-    def create_global(cls, commands: list[Command], config: Config):
+    def create_global(cls, commands: list[type[Command]], config: Config):
         global_data = GlobalEnvironmentData(commands, config)
         new_global = cls(global_data)
         new_global._global_init()
@@ -103,7 +107,8 @@ class Environment:
 
     def __enter__(self):
         if self.previous_env is None:
-            return
+            return self
+        return self
 
     def __exit__(self, exc_type: type[Exception], exc_value: str, exc_traceback: str):
         # General environment closing statement

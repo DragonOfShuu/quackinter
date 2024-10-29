@@ -36,12 +36,11 @@ class HoldReleaseCommand(Command):
             pyag.keyDown(key)
             keys.append(key)
 
-    @classmethod
-    def execute(cls, stack: Stack, cmd: str, data: str) -> None:
+    def execute(self, stack: Stack, cmd: str, data: str) -> None:
         command = cmd.upper()
         keys = [key for key in data.strip().split(" ") if key.strip()]
 
         if command == "HOLD":
-            cls._hold_keys(stack.environment, keys)
+            self._hold_keys(stack.environment, keys)
         else:
-            cls._release_keys(stack.environment, keys)
+            self._release_keys(stack.environment, keys)

@@ -17,8 +17,6 @@ class StackContext:
         self._ducky_code = ducky
         self.stack = stack
         self.config = environment.config
-        self._time_between_lines_override = self.config.interval
-        self._time_between_chars_override = self.config.char_interval
 
         self._current_line: Line | None = None
         self.is_running = False
@@ -42,7 +40,7 @@ class StackContext:
             self.generated_lines.append(new_line)
             self._current_line = new_line
             yield new_line
-            sleep(self.environment.global_vars["_DEFAULT_DELAY"])
+            sleep(self.environment.global_vars.get("_DEFAULT_DELAY", 0) / 1000)
         self.is_running = False
         self._current_line = None
 
