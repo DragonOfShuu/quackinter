@@ -16,9 +16,8 @@ class DefaultStringDelay(Command):
         new_value = self.convert_int(data.strip())
         stack.environment.global_vars[self.GLOBAL_ENV_NAME] = new_value
 
-    @classmethod
-    def global_environment_init(cls, environment: Environment) -> None:
-        environment.global_vars[cls.GLOBAL_ENV_NAME] = environment.config.char_interval
-        environment.global_vars[cls.GLOBAL_ENV_OVERRIDE_NAME] = (
+    def global_environment_init(self, environment: Environment) -> None:
+        environment.global_vars[self.GLOBAL_ENV_NAME] = environment.config.char_interval
+        environment.global_vars[self.GLOBAL_ENV_OVERRIDE_NAME] = (
             environment.config.interval is not None
         )

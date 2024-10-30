@@ -60,8 +60,13 @@ class KeyInjector:
     def press(self, key: str):
         pyag.press(self._verify_key(key), interval=self.char_interval)
 
-    def write(self, text: str):
-        pyag.write(text, interval=self.char_interval)
+    def write(self, text: str, interval_override: None | int = None):
+        interval = (
+            interval_override / 1000
+            if interval_override is not None
+            else self.char_interval
+        )
+        pyag.write(text, interval=interval)
 
     def hotkey(self, hotkeys: list[str]):
         keys = [(key.lower() if len(key) > 1 else key) for key in hotkeys if key]

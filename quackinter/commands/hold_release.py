@@ -13,14 +13,12 @@ class HoldReleaseCommand(Command):
     def _get_keys(cls, environment: Environment) -> list[str]:
         return environment.global_vars[cls.HELD_KEYS_KEY]
 
-    @classmethod
-    def global_environment_init(cls, environment: Environment) -> None:
-        environment.global_vars[cls.HELD_KEYS_KEY] = []
+    def global_environment_init(self, environment: Environment) -> None:
+        environment.global_vars[self.HELD_KEYS_KEY] = []
 
-    @classmethod
-    def global_environment_exit(cls, environment: Environment) -> None:
-        keys: list[str] = cls._get_keys(environment)
-        cls._release_keys(environment, keys)
+    def global_environment_exit(self, environment: Environment) -> None:
+        keys: list[str] = self._get_keys(environment)
+        self._release_keys(environment, keys)
 
     @classmethod
     def _release_keys(cls, environment: Environment, to_release: list[str]):

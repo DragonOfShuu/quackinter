@@ -24,8 +24,8 @@ class Stack:
         else:
             self.environment = Environment()
 
-    def run(self, ducky: list[str]) -> str | None:
-        self._context = StackContext(ducky, self.environment, self)
+    def run(self, ducky: list[str], offset: int = 0) -> str | None:
+        self._context = StackContext(ducky, self.environment, self, offset)
         for line in self._context:
             cmd_str, data = extract_cmd(line.line)
             command = self._find_command(cmd_str, data)

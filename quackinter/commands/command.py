@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from quackinter.environment import Environment
+from quackinter.line import Line
 from quackinter.stack import Stack
 from quackinter.errors import NotANumberError
 
@@ -47,7 +48,7 @@ class Command(ABC):
     @staticmethod
     def convert_int(data: str):
         try:
-            return int(data)
+            return int(data.strip())
         except ValueError:
             raise NotANumberError(f"Value '{data}' is not an integer.")
 
@@ -56,3 +57,11 @@ class Command(ABC):
 
     def global_environment_exit(self, environment: Environment) -> None:
         pass
+
+    def tick(self, stack: Stack, line: Line) -> None:
+        """
+        This function runs between every
+        single line. It is ran after the
+        given line.
+        """
+        return None
