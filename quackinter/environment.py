@@ -1,10 +1,13 @@
 from __future__ import annotations
-from typing import Any
+from typing import Any, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from quackinter.commands.command import Command
-from quackinter.config import Config
 from quackinter.errors import NotInitiatedError
+
+
+if TYPE_CHECKING:
+    from quackinter.config import Config
+    from quackinter.commands.command import Command
 
 
 @dataclass

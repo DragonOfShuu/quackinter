@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from quackinter.commands.command import Command
+from typing import TYPE_CHECKING
+
 from quackinter.environment import Environment
 from quackinter.stack_context import StackContext
 from quackinter.utils import extract_cmd
@@ -9,6 +10,9 @@ from quackinter.errors import (
     InterpretationError,
     NotInitiatedError,
 )
+
+if TYPE_CHECKING:
+    from quackinter.commands.command import Command
 
 
 class Stack:
@@ -40,7 +44,7 @@ class Stack:
                 ie.add_context(self._context)
                 raise ie
 
-    def _find_command(self, cmd: str, data: str) -> Command | None:
+    def _find_command(self, cmd: str, data: str) -> "Command | None":
         for i in self.environment.commands:  # type: ignore
             if i.is_this_command(cmd, data):
                 return i

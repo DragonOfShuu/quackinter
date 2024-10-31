@@ -1,18 +1,20 @@
 from __future__ import annotations
 
-from typing import Generator
+from typing import Generator, TYPE_CHECKING
 from time import sleep
 
 from quackinter.environment import Environment
 from quackinter.errors import QuackinterError
 from quackinter.line import Line
 from quackinter.sanitizer import Sanitizer
-from quackinter.stack import Stack
+
+if TYPE_CHECKING:
+    from quackinter.stack import Stack
 
 
 class StackContext:
     def __init__(
-        self, ducky: list[str], environment: Environment, stack: Stack, offset: int
+        self, ducky: list[str], environment: Environment, stack: "Stack", offset: int
     ) -> None:
         self._ducky_code = ducky
         self.stack = stack

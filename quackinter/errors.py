@@ -1,4 +1,7 @@
-from quackinter.stack_context import StackContext
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from quackinter.stack_context import StackContext
 
 
 class QuackinterError(Exception):
@@ -14,7 +17,7 @@ class InterpretationError(QuackinterError):
         super().__init__(*args)
         self.contexts = []
 
-    def add_context(self, new_context: StackContext):
+    def add_context(self, new_context: "StackContext"):
         self.contexts.append(new_context)
 
 
