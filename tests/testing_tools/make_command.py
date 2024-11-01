@@ -8,7 +8,8 @@ if TYPE_CHECKING:
 
 
 class ExecuteCommand(Protocol):
-    def __call__(self, stack: "Stack", cmd: str, data: str) -> Any: ...
+    @staticmethod
+    def __call__(command_self: Command, stack: "Stack", cmd: str, data: str) -> Any: ...
 
 
 def make_command(new_names: list[str], new_execute: ExecuteCommand):
@@ -16,6 +17,6 @@ def make_command(new_names: list[str], new_execute: ExecuteCommand):
         names = new_names
 
         def execute(self, stack: Stack, cmd: str, data: str) -> None:
-            return new_execute(stack, cmd, data)
+            return new_execute(self, stack, cmd, data)
 
     return TestCommand

@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Any, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from quackinter.errors import NotInitiatedError
+from quackinter.errors import NotInitiatedError, VariableNotDefinedError
 
 
 if TYPE_CHECKING:
@@ -25,7 +25,7 @@ class Environment:
     """
 
     def __init__(self, data: Environment | GlobalEnvironmentData):
-        self.vars: dict[str, Any] = {}
+        self._vars: dict[str, Any] = {}
         self.global_vars: dict[str, Any] = data.global_vars
         self.config: Config = data.config
 
@@ -36,13 +36,35 @@ class Environment:
             self.previous_env = None
             self.commands = [cmd(self) for cmd in data.commands]
 
+    def get_var(self, name: str) -> Any:
+        """
+        Get a variable that is local
+        to this scope or higher.
+        """
+        if name in self._vars:
+            return self._vars[name]
+        if not self.previous_env:
+            raise VariableNotDefinedError(f"{name} is not defined.")
+        return self.previous_env.get_var(name)
+
+    @property
+    def vars(self):
+        """
+        Get all vars from this scope and above.
+        DO NOT EDIT THE RESULT; IT WILL NOT
+        UPDATE THE ENVIRONMENT.
+        """
+        if not self.previous_env:
+            return {**self._vars}
+        return {**self.previous_env.vars, **self._vars}
+
     def edit_var(self, name: str, val: Any) -> bool:
         """
         Edit a variable on the enviro stack,
         starting here and going down.
         """
-        if name in self.vars:
-            self.vars[name] = val
+        if name in self._vars:
+            self._vars[name] = val
             return True
         if self.previous_env:
             return self.previous_env.edit_var(name, val)
@@ -57,7 +79,7 @@ class Environment:
         if successful_edit:
             return False
 
-        self.vars[name] = val
+        self._vars[name] = val
         return True
 
     def remove_var(self, name: str) -> bool:
@@ -66,8 +88,8 @@ class Environment:
         starting with this point in the enviro
         stack, going down
         """
-        if name in self.vars:
-            self.vars.pop(name)
+        if name in self._vars:
+            self._vars.pop(name)
             return True
 
         if self.previous_env:

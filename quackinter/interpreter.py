@@ -11,10 +11,13 @@ class Interpreter:
     def __init__(
         self,
         extended_commands: list[type[Command]] | None = None,
+        include_builtins: bool = True,
         config: Config | None = None,
     ) -> None:
         self.extended_commands = extended_commands or []
-        self.commands = [*self.extended_commands, *built_in_ducky_commands]
+        self.commands = [*self.extended_commands]
+        if include_builtins:
+            self.commands.extend(built_in_ducky_commands)
         self.config = Config() if not config else config
 
     def interpret_text(self, text: str):

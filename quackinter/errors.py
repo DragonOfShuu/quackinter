@@ -33,6 +33,10 @@ class CommandNotDefinedError(InterpretationError):
     pass
 
 
+class VariableNotDefinedError(InterpretationError):
+    pass
+
+
 class NotANumberError(InterpretationError):
     pass
 
