@@ -1,19 +1,9 @@
-from quackinter.commands.command import Command
+from quackinter.config import Config
 from quackinter.interpreter import Interpreter
-from quackinter.stack import Stack
-
-from tests.testing_tools.make_command import make_command
+from tests import hello_world_cmd
 
 # import pytest
 from time import perf_counter
-
-
-def hello_world_cmd(global_list: list[str]):
-    def execute(command_self: Command, stack: Stack, cmd: str, data: str):
-        global_list.append("Hello World")
-
-    return make_command(["HELLO_WORLD"], execute)
-
 
 def test_simple_interpretation():
     global_list = []
@@ -38,3 +28,13 @@ def test_speed_interpretation():
 
     assert global_list == ["Hello World" for _ in range(50000)]
     assert end - start < 1
+
+def test_delay():
+    config = Config(delay=300, output=lambda output: print(output))
+    interpreter = Interpreter(config=config)
+    start = perf_counter()
+    interpreter.interpret_text("PRINTLN hello world")
+    end = perf_counter()
+
+    assert end - start > 0.3
+    assert end - start < 0.301

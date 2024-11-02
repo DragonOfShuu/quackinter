@@ -3,7 +3,7 @@ from quackinter.environment import Environment
 from quackinter.stack import Stack
 
 
-class DefaultStringDelay(Command):
+class DefaultStringDelayCommand(Command):
     names = ["DEFAULT_STRING_DELAY", "DEFAULTSTRINGDELAY"]
 
     GLOBAL_ENV_NAME = "_DEFAULT_STRING_DELAY"

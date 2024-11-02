@@ -8,11 +8,11 @@ class OutputPrint(Protocol):
 
 @dataclass
 class Config:
-    # Delay before we start
-    delay: float = 0
-    # Interval between lines
+    # Delay before we start in ms
+    delay: int = 0
+    # Interval between lines in ms
     interval: int | None = None
-    # Interval between chars
+    # Interval between chars in ms
     char_interval: int = 80
     # In case we need to print somewhere,
     # where to print

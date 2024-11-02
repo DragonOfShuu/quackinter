@@ -4,7 +4,7 @@ from quackinter.line import Line
 from quackinter.stack import Stack
 
 
-class StringDelay(Command):
+class StringDelayCommand(Command):
     names = ["STRINGDELAY", "STRING_DELAY"]
     include_with_repeat = True
 
