@@ -43,6 +43,7 @@ MediaArgType = Literal[
 
 class MediaCommand(Command):
     subcommands = list(get_args(MediaArgType))
+    names = ['MEDIA']
 
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
         clean_data: MediaArgType = cast(MediaArgType, data.strip().upper())
@@ -93,12 +94,20 @@ class MediaArgument:
         self.key_injector.press("volumedown")
 
     def bright_up(self):
+        """
+        DUE TO UPSTREAM ISSUES, THIS
+        METHOD IS RELATIVELY SHOW.
+        """
         current_brightness = sbc.get_brightness()
-        sbc.set_brightness(min(100, current_brightness + 5))
+        sbc.set_brightness(min(100, current_brightness[0] + 10))
 
     def bright_down(self):
+        """
+        DUE TO UPSTREAM ISSUES, THIS
+        METHOD IS RELATIVELY SHOW.
+        """
         current_brightness = sbc.get_brightness()
-        sbc.set_brightness(min(100, current_brightness + 5))
+        sbc.set_brightness(min(100, current_brightness[0] + 10))
 
     def home(self):
         self.key_injector.press("browserhome")

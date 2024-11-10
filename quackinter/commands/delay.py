@@ -8,4 +8,4 @@ class DelayCommand(Command):
     names = ["DELAY"]
 
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
-        sleep(self.convert_float(data))
+        sleep(self.convert_int(data) / 1000)

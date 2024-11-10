@@ -5,6 +5,8 @@ from quackinter.stack import Stack
 
 
 class AltCharCommand(Command):
+    names = ["ALTCHAR", "ALT_CHAR"]
+
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
         clean_data = data.strip()
 
