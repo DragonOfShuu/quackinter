@@ -96,7 +96,9 @@ class MediaArgument:
     def bright_up(self):
         """
         DUE TO UPSTREAM ISSUES, THIS
-        METHOD IS RELATIVELY SHOW.
+        METHOD CAN BE SLOW IF THERE
+        IS A MONITOR CONNECTED THAT
+        CANNOT HAVE BRIGHTNESS ADJUSTED.
         """
         current_brightness = sbc.get_brightness()
         sbc.set_brightness(min(100, current_brightness[0] + 10))
@@ -104,7 +106,9 @@ class MediaArgument:
     def bright_down(self):
         """
         DUE TO UPSTREAM ISSUES, THIS
-        METHOD IS RELATIVELY SHOW.
+        METHOD CAN BE SLOW IF THERE
+        IS A MONITOR CONNECTED THAT
+        CANNOT HAVE BRIGHTNESS ADJUSTED.
         """
         current_brightness = sbc.get_brightness()
         sbc.set_brightness(min(100, current_brightness[0] + 10))
