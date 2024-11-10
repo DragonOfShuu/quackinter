@@ -1,6 +1,8 @@
-
 # Python
 __pycache__
+
+# Poetry
+dist
 
 # Ruff
 .ruff_cache
