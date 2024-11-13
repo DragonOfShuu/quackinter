@@ -50,8 +50,9 @@ class GeneralKeyCommand(Command):
             (lowered.lower() if len(lowered) > 1 else lowered) for lowered in new_cmd
         ]
 
-    def is_this_command(self, name: str, data: str) -> bool:
-        normalized = self._normalize_cmd(name)
+    @classmethod
+    def is_this_command(cls, name: str, data: str) -> bool:
+        normalized = cls._normalize_cmd(name)
 
         # Verify first cmd is in our major list
         if normalized[0] not in all_cmds:

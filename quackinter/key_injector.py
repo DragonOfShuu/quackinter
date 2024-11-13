@@ -78,3 +78,9 @@ class KeyInjector:
     def hold(self, key: str | list[str]):
         new_key = [key] if isinstance(key, str) else key
         return pyag.hold([self._verify_key(key) for key in new_key if key])
+
+    def key_down(self, key: str):
+        pyag.keyDown(self._verify_key(key))
+    
+    def key_up(self, key: str):
+        pyag.keyUp(self._verify_key(key))

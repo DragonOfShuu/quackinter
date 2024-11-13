@@ -35,8 +35,9 @@ class Command(ABC):
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
         pass
 
-    def is_this_command(self, name: str, data: str) -> bool:
-        return name.upper() in self.names
+    @classmethod
+    def is_this_command(cls, name: str, data: str) -> bool:
+        return name.upper() in cls.names
 
     @staticmethod
     def convert_float(data: str):
