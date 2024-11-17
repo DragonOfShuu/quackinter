@@ -5,6 +5,7 @@ from tests import hello_world_cmd
 # import pytest
 from time import perf_counter
 
+
 def test_simple_interpretation():
     global_list = []
 
@@ -28,6 +29,7 @@ def test_speed_interpretation():
 
     assert global_list == ["Hello World" for _ in range(50000)]
     assert end - start < 1
+
 
 def test_delay():
     config = Config(delay=300, output=lambda output: print(output))

@@ -36,7 +36,7 @@ class StackContext:
         self.is_running = True
         self.generated_lines = []
         for index, line in enumerate(self._ducky_code):
-            corrected_index = index + self.offset
+            corrected_index = index + self.offset + 1
             if not line.strip():
                 continue
 

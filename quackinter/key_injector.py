@@ -81,6 +81,6 @@ class KeyInjector:
 
     def key_down(self, key: str):
         pyag.keyDown(self._verify_key(key))
-    
+
     def key_up(self, key: str):
         pyag.keyUp(self._verify_key(key))

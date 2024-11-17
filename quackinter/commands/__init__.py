@@ -19,7 +19,6 @@ from quackinter.commands.wait_for_button_press import WaitForButtonPressCommand
 
 command_list: list[type[Command]] = [
     GeneralKeyCommand,
-
     AltCharCommand,
     AltStringCommand,
     DefaultDelayCommand,

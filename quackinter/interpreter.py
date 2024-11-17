@@ -12,8 +12,9 @@ from quackinter.stack_trace import StackTrace
 
 @dataclass
 class InterpreterReturn:
-    stacktrace: StackTrace|None = None
+    stacktrace: StackTrace | None = None
     error: bool = False
+
 
 class Interpreter:
     def __init__(
@@ -41,9 +42,5 @@ class Interpreter:
                 stack.run(lines)
             except InterpretationError as e:
                 stacktrace = StackTrace.from_error(e)
-        
-        return InterpreterReturn(
-            stacktrace,
-            stacktrace is not None
-        )
-    
+
+        return InterpreterReturn(stacktrace, stacktrace is not None)

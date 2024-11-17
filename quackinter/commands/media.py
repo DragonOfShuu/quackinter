@@ -43,7 +43,7 @@ MediaArgType = Literal[
 
 class MediaCommand(Command):
     subcommands = list(get_args(MediaArgType))
-    names = ['MEDIA']
+    names = ["MEDIA"]
 
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
         clean_data: MediaArgType = cast(MediaArgType, data.strip().upper())

@@ -6,11 +6,12 @@ def interpret(ducky: str, config: Config | None = None):
     interpreter = Interpreter(config=config)
     return interpreter.interpret_text(ducky)
 
+
 def main():
     print("Await 3 seconds...")
     config = Config(delay=3000)
     interpret(
-"""
+        """
 WIN r
 DELAY 1000
 STRINGLN powershell
@@ -23,13 +24,17 @@ STRINGLN -----------------------
 STRINGLN  -> The best DuckyScript 
 STRINGLN     interpreter for 
 STRINGLN     Windows/Mac/Linux
-""", config)
+""",
+        config,
+    )
+
 
 def test():
     print("Await 1 second...")
     config = Config(delay=1000)
     interpret(
-"""
+        """
 ALTCHAR 0153
-""", config)
-    
+""",
+        config,
+    )
