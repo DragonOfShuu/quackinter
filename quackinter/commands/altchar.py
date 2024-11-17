@@ -16,6 +16,8 @@ class AltCharCommand(Command):
             )
 
         key_injector = KeyInjector(stack.environment)
-        with key_injector.hold("alt"):
-            for num in clean_data:
-                key_injector.press(f"num{num}")
+        # with key_injector.hold("alt"):
+        key_injector.key_down("alt")
+        for num in clean_data:
+            key_injector.press(f"num{num}")
+        key_injector.key_up("alt")

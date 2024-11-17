@@ -103,4 +103,8 @@ class StackContext:
 
     @property
     def current_line(self):
+        if not self.is_running or not self._current_line:
+            raise QuackinterError(
+                "To get the current line index, StackContext must be running."
+            )
         return self._current_line

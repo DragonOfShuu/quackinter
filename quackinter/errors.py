@@ -15,7 +15,7 @@ class OutsideContextError(QuackinterError):
 class InterpretationError(QuackinterError):
     def __init__(self, *args: object):
         super().__init__(*args)
-        self.contexts = []
+        self.contexts: "list[StackContext]" = []
 
     def add_context(self, new_context: "StackContext"):
         self.contexts.append(new_context)

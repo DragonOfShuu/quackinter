@@ -4,7 +4,7 @@ from quackinter.interpreter import Interpreter
 
 def interpret(ducky: str, config: Config | None = None):
     interpreter = Interpreter(config=config)
-    interpreter.interpret_text(ducky)
+    return interpreter.interpret_text(ducky)
 
 def main():
     print("Await 3 seconds...")
@@ -30,11 +30,6 @@ def test():
     config = Config(delay=1000)
     interpret(
 """
-DEFAULTDELAY 0
-MEDIA BRIGHT_UP
-MEDIA BRIGHT_UP
-MEDIA BRIGHT_UP
-MEDIA BRIGHT_UP
-MEDIA BRIGHT_UP
+ALTCHAR 0153
 """, config)
     
