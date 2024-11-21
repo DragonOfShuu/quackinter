@@ -1,7 +1,7 @@
 from quackinter.quackinter import interpret as interpret
 from quackinter.interpreter import (
     Interpreter as Interpreter,
-    InterpreterReturn as InterpreterReturn
+    InterpreterReturn as InterpreterReturn,
 )
 from quackinter.config import Config as Config
 from quackinter.environment import Environment as Environment

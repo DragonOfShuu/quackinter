@@ -1,6 +1,8 @@
 import typing
+import platform as pf
 
 import pyautogui as pyag
+import pyperclip as pyclip
 
 from quackinter.environment import Environment
 from quackinter.errors import KeyNotExistError
@@ -68,11 +70,31 @@ class KeyInjector:
         )
         pyag.write(text, interval=interval)
 
-    def hotkey(self, hotkeys: list[str]):
+    def copy_paste_write(self, text: str, interval_override: None | int = None):
+        interval = (
+            interval_override
+            if interval_override is not None
+            else self.char_interval * 1000
+        )
+        old_clipboard_data = pyclip.paste()
+        for char in text:
+            pyclip.copy(char)
+            if pf.system() == "Darwin":
+                self.hotkey(["command", "v"], interval_override=interval)
+            else:
+                self.hotkey(["ctrl", "v"], interval_override=interval)
+        pyclip.copy(old_clipboard_data)
+
+    def hotkey(self, hotkeys: list[str], interval_override: None | int = None):
+        interval = (
+            interval_override / 1000
+            if interval_override is not None
+            else self.char_interval
+        )
         keys = [(key.lower() if len(key) > 1 else key) for key in hotkeys if key]
         pyag.hotkey(
             *[self._verify_key(key) for key in keys],
-            interval=self.char_interval,
+            interval=interval,
         )
 
     def hold(self, key: str | list[str]):

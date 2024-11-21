@@ -34,7 +34,7 @@ def test():
     config = Config(delay=1000)
     interpret(
         """
-ALTCHAR 0153
+ALTCHAR 231
 """,
         config,
     )
