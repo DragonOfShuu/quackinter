@@ -6,4 +6,4 @@ class PrintLnCommand(Command):
     names = ["PRINTLN", "PRINT_LINE"]
 
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
-        self.global_env.config.output(data.strip())
+        self.global_env.config.output(data.strip(), stack.context.current_line)

@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from typing import Protocol
 
+from quackinter.line import Line
+
 
 class OutputPrint(Protocol):
-    def __call__(self, output: str): ...
+    def __call__(self, output: str, line: Line): ...
 
 
 @dataclass
@@ -16,4 +18,4 @@ class Config:
     char_interval: int = 80
     # In case we need to print somewhere,
     # where to print
-    output: OutputPrint = lambda output: None
+    output: OutputPrint = lambda output, line: None

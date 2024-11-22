@@ -8,6 +8,20 @@ if TYPE_CHECKING:
 @dataclass
 class Line:
     line: str
-    line_index: int
+    """
+    The content of this line [sanitized].
+    """
+    line_num: int
+    """
+    A 1-based index of the line
+    number this is.
+    """
     orig_line: str
+    """
+    The content of this line [DIRTY].
+    """
     command: "Command | None" = None
+    """
+    The Command this line was discovered
+    to be.
+    """

@@ -6,3 +6,6 @@ dist
 
 # Ruff
 .ruff_cache
+
+# Custom Tests
+tests/custom_test_scripts/*

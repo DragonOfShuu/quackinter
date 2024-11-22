@@ -43,6 +43,10 @@ class KeyInjector:
 
     @property
     def char_interval(self):
+        """
+        The global string character interval
+        in seconds.
+        """
         return self.environment.global_vars.get("_DEFAULT_STRING_DELAY", 80) / 1000
 
     @classmethod
@@ -59,8 +63,8 @@ class KeyInjector:
             raise KeyNotExistError(f"{key} is not a valid key.")
         return new_key
 
-    def press(self, key: str):
-        pyag.press(self._verify_key(key), interval=self.char_interval)
+    def press(self, key: str, char_override: int|None = None):
+        pyag.press(self._verify_key(key), interval=(char_override/1000) if char_override is not None else self.char_interval)
 
     def write(self, text: str, interval_override: None | int = None):
         interval = (

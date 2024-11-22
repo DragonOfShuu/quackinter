@@ -31,13 +31,13 @@ READ_BACK""".split(
         empty_lines = 2
 
         assert len(stack_context.generated_lines) == 6
-        assert stack_context.current_line_index == line_offset + 6 + empty_lines
+        assert stack_context.current_line_num == line_offset + 6 + empty_lines
 
         back_one_line = stack_context.get_line_offset(1)
         assert back_one_line is not None, "The previous line must not be None"
         assert isinstance(back_one_line.command, hello_world)
         assert back_one_line.line == "HELLO_WORLD 4"
-        assert back_one_line.line_index == line_offset + 5 + empty_lines
+        assert back_one_line.line_num == line_offset + 5 + empty_lines
 
     read_back = make_command(["READ_BACK"], execute_read_back)
 

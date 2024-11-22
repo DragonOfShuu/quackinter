@@ -6,10 +6,9 @@ def interpret(ducky: str, config: Config | None = None):
     interpreter = Interpreter(config=config)
     return interpreter.interpret_text(ducky)
 
-
 def main():
-    print("Await 3 seconds...")
-    config = Config(delay=3000)
+    print("Await 1 second...")
+    config = Config(delay=1000)
     interpret(
         """
 WIN r
@@ -28,13 +27,5 @@ STRINGLN     Windows/Mac/Linux
         config,
     )
 
-
-def test():
-    print("Await 1 second...")
-    config = Config(delay=1000)
-    interpret(
-        """
-ALTCHAR 231
-""",
-        config,
-    )
+if __name__ == "__main__":
+    main()

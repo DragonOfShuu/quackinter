@@ -132,7 +132,8 @@ class MediaArgument:
         raise UnsupportedError("Snapshot key is unsupported.")
 
     def play(self):
-        self.key_injector.press("play")
+        self.key_injector.press("pause", char_override=0)
+        self.key_injector.press("playpause")
 
     def pause(self):
         self.key_injector.press("pause")

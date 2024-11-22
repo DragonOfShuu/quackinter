@@ -94,12 +94,16 @@ class StackContext:
         return self.get_line_gen()
 
     @property
-    def current_line_index(self):
+    def current_line_num(self):
+        """
+        A 1-based index of the current
+        line that we are on.
+        """
         if not self.is_running or not self._current_line:
             raise QuackinterError(
                 "To get the current line index, StackContext must be running."
             )
-        return self._current_line.line_index
+        return self._current_line.line_num
 
     @property
     def current_line(self):
