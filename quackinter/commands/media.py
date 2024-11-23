@@ -66,13 +66,13 @@ class MediaArgument:
 
     def power(self):
         if self.is_windows:
-            subprocess.run(["shutdown", "/s", "/t 0"])
+            subprocess.run(["shutdown", "/s", "/t", "0"])
         else:
             subprocess.run(["shutdown", "now"])
 
     def reboot(self):
         if self.is_windows:
-            subprocess.run(["shutdown", "/r", "/t 0"])
+            subprocess.run(["shutdown", "/r", "/t", "0"])
         else:
             subprocess.run(["reboot"])
 
@@ -81,7 +81,7 @@ class MediaArgument:
 
     def logoff(self):
         if self.is_windows:
-            subprocess.run(["shutdown", "/l", "/t 0"])
+            subprocess.run(["shutdown", "/l", "/t", "0"])
         else:
             raise UnsupportedError(
                 "Logoff is not supported for unix operating systems."

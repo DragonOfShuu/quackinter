@@ -31,10 +31,22 @@ def generate_tests():
 DELAY 1000
 STRINGLN edge
 DELAY 1000
-STRINGLN https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=true
+WIN LEFTARROW
+ALT TAB
+STRINGDELAY 10
+STRINGLN https://www.youtube.com/watch?v=dQw4w9WgXcQ
+DELAY 2000
+SPACE
 DELAY 5000
 WAITFORBUTTONPRESS GOTTEM
-REPEAT 2
+REPEAT 1
+PRINTLN lol
+DELAY 500
+WIN 
+STRINGLN notepad
+DELAY 1000
+WIN RIGHTARROW
+STRINGLN GOTTEM ONCE AGAIN MUAHAHAHAHHAA
 """)
     print("Generation complete! Run \"poetry run poe test\" to run!")
 
