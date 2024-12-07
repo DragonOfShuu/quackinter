@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quackinter"
-version = "0.2.1.1"
+version = "0.2.2"
 description = "A sophisticated interpreter for DuckyScript 1.0 and flipper specific commands."
 authors = ["Dragon of Shuu <68718280+DragonOfShuu@users.noreply.github.com>"]
 readme = "README.md"
