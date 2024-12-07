@@ -49,7 +49,7 @@ class MediaCommand(Command):
         clean_data: MediaArgType = cast(MediaArgType, data.strip().upper())
         if clean_data not in self.subcommands:
             raise InvalidArgError(
-                f'"{data.strip()}" is not an acceptible arg. Accepted args for MEDIA: {', '.join(self.subcommands)}'
+                f'"{data.strip()}" is not an acceptible arg. Accepted args for MEDIA: {", ".join(self.subcommands)}'
             )
 
         media_argument = MediaArgument(stack.environment)

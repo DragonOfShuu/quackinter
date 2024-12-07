@@ -32,7 +32,7 @@ def test_speed_interpretation():
 
 
 def test_delay():
-    config = Config(delay=300, output=lambda output: print(output))
+    config = Config(delay=300, output=lambda output,line: print(output))
     interpreter = Interpreter(config=config)
     start = perf_counter()
     interpreter.interpret_text("PRINTLN hello world")
