@@ -28,6 +28,7 @@ class GeneralKeyCommand(Command):
         "CONTROL": "CTRL",
         "WINDOWS": "WIN",
         "GUI": "WIN",
+        "META": "WIN",
         "APP": "APPS",
         "MENU": "APPS",
         "UPARROW": "UP",
