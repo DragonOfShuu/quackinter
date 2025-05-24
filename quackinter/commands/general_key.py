@@ -1,6 +1,7 @@
 from quackinter.commands.command import Command
 from quackinter.stack import Stack
 from quackinter.key_injector import KeyInjector
+import re
 
 # fmt: off
 all_cmds = ['accept', 'alt', 'altleft', 'altright', 'apps', 'backspace',
@@ -43,7 +44,9 @@ class GeneralKeyCommand(Command):
     def _normalize_cmd(cls, cmd: str) -> list[str]:
         new_cmd = cmd.replace("+", "-")
         for key, val in cls.conversion_chart.items():
-            new_cmd = new_cmd.replace(key, val)
+            new_cmd = re.sub(
+                rf"{re.escape(key)}", val, new_cmd, flags=re.IGNORECASE
+            )
 
         new_cmd = new_cmd.split("-")
 
