@@ -1,5 +1,9 @@
 from quackinter.commands.command import Command
-from quackinter.errors import InterpretationSyntaxError, NotANumberError, InvalidArgError
+from quackinter.errors import (
+    InterpretationSyntaxError,
+    NotANumberError,
+    InvalidArgError,
+)
 from quackinter.line import Line
 from quackinter.stack import Stack
 from quackinter.stack_context import StackContext
@@ -14,9 +18,11 @@ class RepeatCommand(Command):
 
         if not clean_data.isnumeric():
             raise NotANumberError("The value given is not a number")
-        
+
         if int(clean_data) > 1_000_000 or int(clean_data) < 1:
-            raise InvalidArgError("Value given to REPEAT must be number through 1 Million and 1")
+            raise InvalidArgError(
+                "Value given to REPEAT must be number through 1 Million and 1"
+            )
 
         if line is None:
             raise InterpretationSyntaxError("There must be a line before repeat to run")
@@ -31,7 +37,7 @@ class RepeatCommand(Command):
 
     def _add_context(self, context: StackContext):
         """
-        Looks for further lines above 
+        Looks for further lines above
         the one we are referring to, to see
         if there is any more necessary context;
         for example, a STRINGDELAY that is above

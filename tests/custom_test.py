@@ -10,7 +10,9 @@ CUSTOM_SCRIPT_LOCATION = Path(__file__).parent / CUSTOM_SCRIPT_FOLDER_NAME
 
 def run_test(index: int = 1):
     print("Await 1 second...")
-    config = Config(delay=1000, output=lambda output,line: print(f"{line.line_num} -> {output}"))
+    config = Config(
+        delay=1000, output=lambda output, line: print(f"{line.line_num} -> {output}")
+    )
 
     ducky_code = CUSTOM_SCRIPT_LOCATION / f"custom{index}.dkls"
     if not ducky_code.exists:
@@ -24,10 +26,12 @@ def run_test(index: int = 1):
             print(f"On line {stack.line_num} -> {stack.line_content}")
         print(return_value.stacktrace.error)
 
+
 def generate_tests():
     CUSTOM_SCRIPT_LOCATION.mkdir(exist_ok=True)
     custom1 = CUSTOM_SCRIPT_LOCATION / "custom1.dkls"
-    custom1.write_text("""WIN
+    custom1.write_text(
+        """WIN
 DELAY 1000
 STRINGLN edge
 DELAY 1000
@@ -47,6 +51,6 @@ STRINGLN notepad
 DELAY 1000
 WIN RIGHTARROW
 STRINGLN GOTTEM ONCE AGAIN MUAHAHAHAHHAA
-""")
-    print("Generation complete! Run \"poetry run poe test\" to run!")
-
+"""
+    )
+    print('Generation complete! Run "poetry run poe test" to run!')

@@ -15,7 +15,10 @@ class StackTraceback:
     @classmethod
     def from_context(cls, context: StackContext):
         return StackTraceback(
-            context.current_line_num, context.current_line.orig_line, context.current_line, context
+            context.current_line_num,
+            context.current_line.orig_line,
+            context.current_line,
+            context,
         )
 
 

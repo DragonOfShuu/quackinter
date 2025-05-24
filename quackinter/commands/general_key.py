@@ -44,9 +44,7 @@ class GeneralKeyCommand(Command):
     def _normalize_cmd(cls, cmd: str) -> list[str]:
         new_cmd = cmd.replace("+", "-")
         for key, val in cls.conversion_chart.items():
-            new_cmd = re.sub(
-                rf"{re.escape(key)}", val, new_cmd, flags=re.IGNORECASE
-            )
+            new_cmd = re.sub(rf"{re.escape(key)}", val, new_cmd, flags=re.IGNORECASE)
 
         new_cmd = new_cmd.split("-")
 

@@ -9,4 +9,6 @@ class WaitForButtonPressCommand(Command):
 
     def execute(self, stack: Stack, cmd: str, data: str) -> None:
         clean_data = data.strip()
-        alert(clean_data if clean_data else "PRESS ENTER TO CONTINUE", button="CONTINUE")
+        alert(
+            clean_data if clean_data else "PRESS ENTER TO CONTINUE", button="CONTINUE"
+        )
